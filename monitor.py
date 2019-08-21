@@ -24,3 +24,16 @@ def list_files_within_the_last_hour():
         print("No Files Found!", "No file in {0}/{1}".format(bucket, s3_key))
     print(s3_list)
     return (s3_list, content)
+
+def read_one_file():
+    try:
+        s3 = boto3.resource('s3')
+        obj = s3.Object(bucket, s3_key) # need to add the specific file
+        n = obj.get()['Body'].read()
+        gzipfile = BytesIO(n)
+        gzipfile = gzip.GzipFile(fileobj=gzipfile)
+        content = gzipfile.read()
+        print(content)
+    except Exception as e:
+        print(e)
+        raise e
