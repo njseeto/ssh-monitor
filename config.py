@@ -9,5 +9,5 @@ get_last_hour = datetime.now() - timedelta(hours = 1)
 last_hour = (get_last_hour.strftime('%H'))
 
 # Add your bucket and key here
-bucket = ''
-key = ''
+bucket = 'logging.unrulymedia.com'
+key = f'/secure/{year}/{month}/{day}/{last_hour}'
