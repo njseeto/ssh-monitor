@@ -10,4 +10,4 @@ last_hour = (get_last_hour.strftime('%H'))
 
 # Add your bucket and key here
 bucket = ''
-key = f'/secure/{year}/{month}/{day}/{last_hour}'
+key = ''
