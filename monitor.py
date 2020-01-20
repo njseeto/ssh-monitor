@@ -3,6 +3,7 @@ import gzip
 from io import BytesIO
 from config import bucket, key
 import re
+from itertools import groupby
 
 s3 = boto3.resource('s3')
 bucket = s3.Bucket(bucket)
@@ -25,13 +26,13 @@ def list_files_within_the_last_hour():
         gzipfile = gzip.GzipFile(fileobj=gzipfile)
         content = gzipfile.read().decode("utf-8").splitlines()
         appended_list.extend(content)
-        print(len(appended_list))
 
     for obj in appended_list:
         ip = find_ip(obj)
         if ip is not None:
             ip_list.append(ip)
-        print(ip_list)
+        results = {value: len(list(frequency)) for value, frequency in groupby(sorted(ip_list))}
+        print(results)
 
         FilesNotFound = False
     if FilesNotFound:
