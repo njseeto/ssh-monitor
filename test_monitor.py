@@ -1,6 +1,6 @@
 import unittest
 from monitor import find_ip
-from test_cases import possible_break_in, invalid_user, no_threat, lower_case_invalid
+from test_cases import possible_break_in, invalid_user, no_threat, lower_case_invalid, london_office
 
 
 class TestFindIp(unittest.TestCase):
@@ -12,6 +12,8 @@ class TestFindIp(unittest.TestCase):
         self.assertEqual(find_ip(no_threat), None)
         self.assertEqual(find_ip(lower_case_invalid), None)
 
+    def test_ips_are_not_malicious_if_london_office(self):
+        self.assertEqual(None, find_ip(london_office))
 
 if __name__ == '__main__':
     unittest.main()
